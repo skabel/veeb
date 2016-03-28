@@ -17,12 +17,15 @@ define('SITENAME', 'Veebiprogrammeerimine');
 define('CLASSES_DIR', BASE_DIR.'classes/');
 define('TMPL_DIR', BASE_DIR.'tmpl/');
 define('ACTS_DIR', BASE_DIR. 'acts/');
+define('LIB_DIR', BASE_DIR. 'lib/');
 
 // võtame vajalikud failid kaasa
 require_once(CLASSES_DIR.'template.php');
 require_once(CLASSES_DIR.'http.php');
 require_once(CLASSES_DIR.'linkobject.php');
 require_once(CLASSES_DIR.'mysql.php');
+
+require_once(LIB_DIR.'utils.php');
 
 // defineerime rollide konstandid
 define('ROLE_NONE', 0);
