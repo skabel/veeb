@@ -5,11 +5,12 @@
  * Date: 7.03.2016
  * Time: 15:04
  */
-
+require_once('conf.php');
 //loome pealehe template
 $tmpl = new template('main');
 
 require_once('menu.php');
+require_once('act.php');
 
 $tmpl->set('menuu', $menu->parse());
 $tmpl->set('nav_bar', strftime(' %A, %d.%B.%Y %H:%M'));
