@@ -15,7 +15,7 @@ if($res === false){
     // koostame veateate
     // suuname tagasi sisselogimise vormi koos veateatega
     $link = $http->getLink(array('act'=>'login'));
-    $http-> redirect($link);
+    $http->redirect($link);
 }
 else{
     // avame kasutajale sessiooni
