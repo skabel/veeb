@@ -12,6 +12,7 @@ class session{
         $this->http = &$http;
         $this->db = &$db;
         $this->sid = $http->get('sid');
+        $this->checkSession();
     }// konstruktor
 
     function setTimeout($t){
@@ -51,8 +52,7 @@ class session{
 
         }
         if($this->sid !== false){
-            $sql = 'SELECT * FROM session'.
-                ' WHERE sid='.fixDb($this->sid);
+            $sql = 'SELECT * FROM session WHERE sid='.fixDb($this->sid);
             $res = $this->db->getArray($sql);
             if($res == false){
                 if($this->anonymous){
@@ -84,19 +84,17 @@ class session{
             define('USER_ID',0);
         }
     }// checkSession
-    function createSession($user = false){
-        if($user){
+    function createSession($user=false){
+        if($user == false){
             $user = array(
-                'user_id' = 0,
-                'role_id' = 0,
-                'username' = 'Anonymous'
+                'user_id' => 0,
+                'role_id' => 0,
+                'username' => 'Anonymous'
             );
         }
         $sid = md5(uniqid(time().mt_rand(1,1000), true));
 
-        $sql = 'INSERT INTO session SET '.
-            'sid='.fixDb($sid).', '.
-            'user_id='.fixDb($user['user_id']).', '.
+        $sql = 'INSERT INTO session SET '.'sid='.fixDb($sid).', '.'user_id='.fixDb($user['user_id']).', '.
             'user_data='.fixDb(serialize($user)).', '.
             'login_ip='.fixDb(REMOTE_ADDR).', '.
             'created=NOW()';
@@ -107,5 +105,22 @@ class session{
 
         // luua cookie lehe nimega
     }
+    function deleteSession(){
+        if($this->SID !== false){
+            $sql = 'DELETE FROM session WHERE sid='.
+            fixDb($this->sid);
+            $this->db->query($sql);
+            $this->sid = false;
+            $this->http->del('sid');
+        }
+    }//deleteSession
+    function flush(){
+        if($this->sid != false){
+            $sql = 'UPDATE session SET changed=NOW(), '.
+                'svars='.fixDb(serialize($this->vars)).
+                ' WHERE sid='.fixDb($this->sid);
+            $this->db->query($sql);
+        }
+    }// flush
 }// session klassi lõpp
 ?>

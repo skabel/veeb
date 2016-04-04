@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: siim-kaarel.kabel
- * Date: 14.03.2016
- * Time: 11:59
- */
 require_once('http.php');
 // /classes/linkobject.php
 
@@ -17,7 +11,7 @@ class linkobject extends http{
     var $eq = '=';
     var $protocol = 'http://';
 
-    var $aie = array('sid'=>'sid');
+    var $aie = array('lang_id', 'sid'=>'sid');
 
 
     function __construct(){
@@ -36,7 +30,7 @@ class linkobject extends http{
         #echo 'addToLink:'.$link.'<br />';
     }//addToLink
 
-    function getLink($add = array(), $aie = array()){
+    function getLink($add = array(), $aie = array(), $not = array()){
         $link = '';
 
         foreach($add as $name=>$val){
@@ -44,8 +38,15 @@ class linkobject extends http{
         }
 
         foreach($aie as $name){
-            $val = $http->get($name);
+            $val = $this->get($name);
             if($val !== false){
+                $this->addToLink($link, $name, $val);
+            }
+        }
+
+        foreach($this->aie as $name){
+            $val = $this->get($name);
+            if($val !== false and !in_array($name, $not)){
                 $this->addToLink($link, $name, $val);
             }
         }

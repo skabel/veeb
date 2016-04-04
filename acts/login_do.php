@@ -13,12 +13,14 @@ $res = $db->getArray($sql);
 
 if($res === false){
     // koostame veateate
+    $sess->set('login_error','Viga sisselogimisel');
     // suuname tagasi sisselogimise vormi koos veateatega
     $link = $http->getLink(array('act'=>'login'));
     $http->redirect($link);
 }
 else{
     // avame kasutajale sessiooni
+    //$sess->createSession();
     // suuname pealehele, mis on vastava sisuga
     $http->redirect();
 }

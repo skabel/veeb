@@ -52,6 +52,17 @@ class http{
             unset($this->vars[$name]);
         }
     }
+    function redirect($url = false){
+        global $sess;
+        $sess->flush();
+
+        if ($url === false){
+            $url = $this->getLink();
+        }
+        $url = str_replace('&amp;', '&', $url);
+        header('Location: '.$url);
+        exit;
+    }
 
 } // http klassi lõpp
 /*

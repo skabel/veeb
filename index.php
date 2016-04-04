@@ -9,8 +9,8 @@ require_once('conf.php');
 //loome pealehe template
 $tmpl = new template('main');
 
+require_once('lang.php');
 require_once('act.php');
-
 require_once('menu.php');
 
 
@@ -23,6 +23,8 @@ $tmpl->add('body', '<br /> ja midagi veel');
 
 // väljastamise täidetud template
 echo $tmpl->parse();
+// sessiooni uuendus
+$sess->flush();
 // andmebaasipäringute kontroll
 
 $db->showHistory();

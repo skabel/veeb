@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: siim-kaarel.kabel
- * Date: 21.03.2016
- * Time: 12:28
- */
 // /menu.php
 
 if(!defined('BASE_DIR')){
@@ -12,9 +6,11 @@ if(!defined('BASE_DIR')){
 }
 $menu = new template('menu.menu');
 $item = new template('menu.item');
-
-$item->set('name','kontakt');
-$link = $http->getLink(array('act'=>'contact'));
+if(USER_ID != ROLE_NONE){
+$item->set('name','Logi v&auml;lja');
+$link = $http->getLink(array('act'=>'logout'));
 $item->set('link', $link);
 $menu->add('items', $item->parse());
+}
+$tmpl->set('menuu', $menu->parse());
 ?>
