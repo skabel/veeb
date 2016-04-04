@@ -115,13 +115,4 @@ class template
         return $str;
     }//parse funktsiooni lõpp
 }//template klassi lõpp
-
-$tmpl = new template('test');
-$tmpl->set('pealkiri', 'test');
-$tmpl->set('yks', 'esimene');
-$tmpl->set('kaks', 'teine');
-echo '<pre>';
-#print_r($tmpl);
-echo '</pre>';
-
 ?>

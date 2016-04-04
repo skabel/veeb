@@ -5,11 +5,13 @@ if(!defined('BASE_DIR')){
     exit;
 }
 $sep = new template('lang.sep');
-$sep->parse();
+$sep = $sep->parse();
+$count = 0;
 
 foreach($siteLangs as $lang_id => $lang_name){
+    $count++;
         if($lang_id == LANG_ID){
-            $site = new template('lang.active');
+            $item = new template('lang.active');
         }
         else{
             $item = new template('lang.item');

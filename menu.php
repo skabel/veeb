@@ -7,7 +7,7 @@ if(!defined('BASE_DIR')){
 $menu = new template('menu.menu');
 $item = new template('menu.item');
 if(USER_ID != ROLE_NONE){
-$item->set('name','Logi v&auml;lja');
+$item->set('name',tr('Logi v&auml;lja'));
 $link = $http->getLink(array('act'=>'logout'));
 $item->set('link', $link);
 $menu->add('items', $item->parse());

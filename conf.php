@@ -18,6 +18,7 @@ define('CLASSES_DIR', BASE_DIR.'classes/');
 define('TMPL_DIR', BASE_DIR.'tmpl/');
 define('ACTS_DIR', BASE_DIR. 'acts/');
 define('LIB_DIR', BASE_DIR. 'lib/');
+define('LANG_DIR', BASE_DIR. 'lang/');
 
 // võtame vajalikud failid kaasa
 require_once(CLASSES_DIR.'template.php');
@@ -27,6 +28,7 @@ require_once(CLASSES_DIR.'mysql.php');
 require_once(CLASSES_DIR.'session.php');
 
 require_once(LIB_DIR.'utils.php');
+require_once(LANG_DIR.'trans.php');
 
 // defineerime rollide konstandid
 define('ROLE_NONE', 0);
@@ -39,7 +41,7 @@ define('DEFAULT_ACT', 'default');
 // defineerime keele konstandid
 define('DEFAULT_LANG', 'et');
 
-$sitelangs = array(
+$siteLangs = array(
     'et' => 'estonian',
     'en' => 'english',
     'ru' => 'russian'
@@ -55,7 +57,7 @@ $sess = new session($http, $db);
 // saame teada, milline on hetke keel
 $lang_id = $http->get('lang_id');
 // otsime sobilik keelekonstant
-if(!isset($sitelangs[$lang_id])){
+if(!isset($siteLangs[$lang_id])){
     $lang_id = DEFAULT_LANG;
     $http->set('lang_id', $lang_id);
 }

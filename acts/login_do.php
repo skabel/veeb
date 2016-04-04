@@ -20,7 +20,7 @@ if($res === false){
 }
 else{
     // avame kasutajale sessiooni
-    //$sess->createSession();
+    $sess->createSession($res[0]);
     // suuname pealehele, mis on vastava sisuga
     $http->redirect();
 }

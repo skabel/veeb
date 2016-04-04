@@ -14,9 +14,7 @@ require_once('act.php');
 require_once('menu.php');
 
 
-$tmpl->set('menuu', $menu->parse());
 $tmpl->set('nav_bar', strftime(' %A, %d.%B.%Y %H:%M'));
-$tmpl->set('lang_bar', 'Siia tuleb keelevahetus (kunagi)');
 $tmpl->add('body', 'Lehe sisu');
 $tmpl->add('body', '<br /> ja midagi veel');
 
